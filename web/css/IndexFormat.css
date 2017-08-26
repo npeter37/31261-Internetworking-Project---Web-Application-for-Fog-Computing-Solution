@@ -9,8 +9,26 @@ and open the template in the editor.
 */
 h1 {
     text-align: center;
+    position: absolute;
+    height: 100px;
+    left: 0;
+    top: 30%;
+    width:100%;
 }
 
 body {
     background-color: lightblue;
+}
+
+input[type=submit] {
+    text-align:center;
+    border:none;
+    font-size: 20px;
+    cursor:pointer;
+    position:absolute;
+    height:50px;
+    left: 25%;
+    top:45%;
+    width:50%;
+    background-color: #AFEAFE;
 }

@@ -13,9 +13,9 @@
         <link rel="stylesheet" href="css/IndexFormat.css" />
     </head>
     <body>
-    <fieldset>
         <h1>Improving the Cloud Through Fog Computing</h1>
-    </fieldset>
-        
+        <form action="Home.jsp" method="post">
+            <input type="submit" value="Enter">
+        </form>
     </body>
 </html>

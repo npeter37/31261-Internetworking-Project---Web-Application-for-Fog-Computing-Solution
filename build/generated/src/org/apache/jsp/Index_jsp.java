@@ -52,10 +52,10 @@ public final class Index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"css/IndexFormat.css\" />\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("    <fieldset>\n");
       out.write("        <h1>Improving the Cloud Through Fog Computing</h1>\n");
-      out.write("    </fieldset>\n");
-      out.write("        \n");
+      out.write("        <form action=\"Home.jsp\" method=\"post\">\n");
+      out.write("            <input type=\"submit\" value=\"Enter\">\n");
+      out.write("        </form>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
