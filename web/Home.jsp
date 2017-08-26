@@ -9,9 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home Page</title>
+        <link rel="stylesheet" href="css/MainFormat.css" />
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Improving the Cloud Through Fog Computing!</h1>
+        <ul>
+            <li><a href="Home.jsp">Home</a></li>
+        </ul>
     </body>
 </html>
