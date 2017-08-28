@@ -68,3 +68,16 @@ p{
     padding-left: 10px;
     padding-right: 10px;
 }
+.tableRegister {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.inputWidth{
+    width:300px;
+    padding: 8px 10px;
+}
+input[type=submit] {
+    position: absolute;
+    cursor: pointer;
+    width:36.3%;
+}

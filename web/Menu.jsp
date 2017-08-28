@@ -19,8 +19,5 @@
             <li class="right"><a href="Login.jsp">Login</a></li>
             <li class="right"><a href="Register.jsp">Register</a></li>
         </ul>
-        <div>
-            
-        </div>
     </body>
 </html>
