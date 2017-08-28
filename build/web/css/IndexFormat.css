@@ -17,7 +17,7 @@ h1 {
 }
 
 body {
-    background-color: lightblue;
+    background-color: #D3D3D3;
 }
 
 input[type=submit] {
@@ -30,5 +30,5 @@ input[type=submit] {
     left: 25%;
     top:45%;
     width:50%;
-    background-color: #AFEAFE;
+    background-color: #BDBDBD;
 }
