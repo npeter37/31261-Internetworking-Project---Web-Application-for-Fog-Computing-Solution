@@ -3,3 +3,6 @@
 /nbproject/private/
 /build/
 build/*
+
+#MacOS
+*.DS_Store
