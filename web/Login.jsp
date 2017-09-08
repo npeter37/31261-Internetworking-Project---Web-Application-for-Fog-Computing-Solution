@@ -16,13 +16,13 @@
             <jsp:useBean id="logIn" class="user.UsersApp" scope="session">
                 <jsp:setProperty name="logIn" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
             </jsp:useBean>
-            <% if (request.getParameter("submitted") != null) {
+            <% if (request.getParameter("log") != null) {
                     Users users = logIn.getUsers();
                     User user = users.login(request.getParameter("email"), request.getParameter("password"));
 
                     if (user != null) {
                         session.setAttribute("user", user);
-                        response.sendRedirect("home.jsp");
+                        response.sendRedirect("Home.jsp");
                     }
             %>
             <h2>No user found, please try again</h2>
@@ -41,6 +41,7 @@
                     <tr>
                         <td></td>
                         <td><input type="submit" value="Login"></td>
+                        <input type="hidden" name="log" value="yes">
                     </tr>
                 </table>
             </form>

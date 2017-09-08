@@ -47,6 +47,13 @@ li.right {
     text-align: center;
 }
 
+li.right1 {
+    float: right;
+    text-align: center;
+    width:250px;
+    
+}
+
 li:last-child {
     border-left: 1px solid #bbb;
 }

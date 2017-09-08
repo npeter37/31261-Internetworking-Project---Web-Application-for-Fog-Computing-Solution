@@ -4,7 +4,7 @@
     Author     : Peter Nguyen
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="user.*" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +14,27 @@
     </head>
     <body>
         <h1>Improving the Cloud Through Fog Computing</h1>
+        <% if (session.getAttribute("user") == null) { %>
         <ul>
             <li><a href="Home.jsp">Home</a></li>
             <li class="right"><a href="Login.jsp">Login</a></li>
             <li class="right"><a href="Register.jsp">Register</a></li>
         </ul>
+        <% } else {
+            User user = (User) session.getAttribute("user");
+        %>
+        <ul>
+            <li><a href="Home.jsp">Home</a></li>
+            
+            <li class="right"><a href="Logout.jsp">Logout</a></li>
+            <li class="right1"><a href="Home.jsp">Logged in as <%= user.getName()%></a></li>
+
+            <%
+                if (user.getPrivilege().equals("admin")) {
+            %>
+            <li class="right"><a href="Admin.jsp">Admin</a></li>  
+                <% } %>
+        </ul>
+        <% }%>
     </body>
 </html>
