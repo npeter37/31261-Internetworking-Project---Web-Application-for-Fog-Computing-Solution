@@ -12,4 +12,11 @@ and open the template in the editor.
         <mac></mac>
         <privilege>user</privilege>
     </user>
+    <user>
+        <name>Admin</name>
+        <email>admin@gmail.com</email>
+        <password>password123</password>
+        <mac></mac>
+        <privilege>admin</privilege>
+    </user>
  </users>

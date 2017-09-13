@@ -25,9 +25,10 @@
         %>
         <ul>
             <li><a href="Home.jsp">Home</a></li>
-            
+            <li><a href="Search.jsp">Search</a></li>
+            <li><a href="Upload.jsp">Upload</a></li>
             <li class="right"><a href="Logout.jsp">Logout</a></li>
-            <li class="right1"><a href="Home.jsp">Logged in as <%= user.getName()%></a></li>
+            <li class="right1"><a href="editAccount.jsp">Logged in as <%= user.getName()%></a></li>
 
             <%
                 if (user.getPrivilege().equals("admin")) {
