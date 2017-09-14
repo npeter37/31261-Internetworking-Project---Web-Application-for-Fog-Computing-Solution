@@ -40,7 +40,7 @@
                         registerApp.updateXML(users);
                         response.sendRedirect("Home.jsp");
                     } else { %>
-            <p>Sorry, that email has already been registered.</p>
+            <p>Sorry. That email has already been registered.</p>
             <% }%>
             <% } else { %>
             <p>Secret answer is incorrect. Please try again.</p>

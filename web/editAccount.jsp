@@ -21,11 +21,23 @@
             <h2>Account Details</h2>
             <%
                 User user = (User) session.getAttribute("user");
-                Users updateUser = getUser.getUsers();
+                //Users updateUser = getUser.getUsers();
                 String name = user.getName();
                 String email = user.getEmail();
                 String password = user.getPassword();
                 String mac = user.getMac();
+
+                if (request.getParameter("edit") != null) {
+                    session.setAttribute("user", user);
+                    Users updateUser = getUser.getUsers();
+                    user.setName(name);
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    user.setMac(mac);
+
+                    getUser.updateXML(updateUser);
+                    response.sendRedirect("results.jsp");
+                }
             %>
             <form action="editAccount.jsp" method="post">
                 <table class="tableRegister">
@@ -43,12 +55,12 @@
                     </tr>
                     <tr>
                         <td><label class="field" for="mac">MAC Address of Device</label></td>
-                        <td><input class="inputWidth" value="<%=mac%>" minlength="6" maxlength="12" type="text" name="mac" required></td>
+                        <td><input class="inputWidth" value="<%=mac%>" minlength="6" maxlength="24" type="text" name="mac" required></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><input type="submit" value="Confirm Edit"></td>
-                        <input type="hidden" name="edit" value="yes">
+                    <input type="hidden" name="edit" value="yes">
                     </tr>
                 </table>
             </form>

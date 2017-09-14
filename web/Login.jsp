@@ -23,10 +23,11 @@
                     if (user != null) {
                         session.setAttribute("user", user);
                         response.sendRedirect("Home.jsp");
-                    }
-            %>
-            <h2>No user found, please try again</h2>
-            <% }%>
+                    } else if (user == null) { %>
+                    <p>Login failed.</p>
+                   <% }
+            } %>
+
             <h2>Login</h2>
             <form action="Login.jsp" method="post">
                 <table class="tableRegister">
@@ -41,7 +42,7 @@
                     <tr>
                         <td></td>
                         <td><input type="submit" value="Login"></td>
-                        <input type="hidden" name="log" value="yes">
+                    <input type="hidden" name="log" value="yes">
                     </tr>
                 </table>
             </form>

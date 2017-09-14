@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td><label class="field" for="mac">MAC Address of Device</label></td>
-                        <td><input class="inputWidth" type="text" minlength="6" maxlength="12" name="mac" required></td>
+                        <td><input class="inputWidth" type="text" minlength="6" maxlength="24" name="mac" required></td>
                     </tr>
                     <tr>
                         <td><label class="field" for="verify">What is the subject number of this subject?</label></td>
