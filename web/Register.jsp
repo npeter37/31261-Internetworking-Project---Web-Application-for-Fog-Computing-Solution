@@ -27,11 +27,11 @@
                     </tr>
                     <tr>
                         <td><label class="field" for="password">Password</label></td>
-                        <td><input class="inputWidth" type="password" name="password" required></td>
+                        <td><input class="inputWidth" type="password" minlength="10" name="password" required></td>
                     </tr>
                     <tr>
                         <td><label class="field" for="mac">MAC Address of Device</label></td>
-                        <td><input class="inputWidth" type="text" name="mac" required></td>
+                        <td><input class="inputWidth" type="text" minlength="6" maxlength="12" name="mac" required></td>
                     </tr>
                     <tr>
                         <td><label class="field" for="verify">What is the subject number of this subject?</label></td>
