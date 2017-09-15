@@ -40,6 +40,7 @@
                 }
             %>
             <form action="editAccount.jsp" method="post">
+                <p>Here are your account details. Will you like to make changes to your account?</p>
                 <table class="tableRegister">
                     <tr>
                         <td><label class="field" for="name">Full name</label></td>
@@ -59,7 +60,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Confirm Edit"></td>
+                        <td><input type="submit" value="Confirm Changes"></td>
                     <input type="hidden" name="edit" value="yes">
                     </tr>
                 </table>

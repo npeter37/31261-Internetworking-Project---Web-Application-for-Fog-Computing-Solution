@@ -18,7 +18,8 @@
             <h2>Administrator</h2>
             <p>Only administrators are granted access to this page and the administrative functions. Click on the following links to perform the following functions.</p>
             <p class="pCenter"><a href="AdminAddUser.jsp">Add New User</a></p>
-            <p class="pCenter">Remove User</p>
+            <p class="pCenter"><a href="AdminRemoveUser.jsp">Remove User</a></p>
+            <p class="pCenter"><a href="AdminViewUser.jsp">View User</a></p>
         </div>
     </body>
 </html>

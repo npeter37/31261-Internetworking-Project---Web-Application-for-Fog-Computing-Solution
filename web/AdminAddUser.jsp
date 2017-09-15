@@ -22,7 +22,7 @@
         </jsp:useBean>
 
         <%
-            if (request.getParameter("add") != null) {
+            if (request.getParameter("Add") != null) {
                 String name = request.getParameter("name");
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
@@ -30,10 +30,10 @@
                 Users users = registerApp.getUsers();
                 if (users.getUser(email) == null) {
                     User user = new User(name, email, password, mac);
-                    session.setAttribute("user", user);
+                    //session.setAttribute("user", user);
                     users.addUser(user);
                     registerApp.updateXML(users);
-                    response.sendRedirect("AdminAddUser.jsp");
+                    response.sendRedirect("AdminViewUser.jsp");
                 } else { %>
         <p>Sorry. The email of the user has already been registered.</p>
         <% }%>

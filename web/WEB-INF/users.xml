@@ -19,4 +19,11 @@ and open the template in the editor.
         <mac></mac>
         <privilege>admin</privilege>
     </user>
- </users>
+    <user>
+        <name>Test</name>
+        <email>test@gmail.com</email>
+        <password>password123</password>
+        <mac></mac>
+        <privilege>user</privilege>
+    </user>
+</users>
