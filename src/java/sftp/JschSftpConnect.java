@@ -11,6 +11,9 @@ import com.jcraft.jsch.*;
 import com.jcraft.jsch.ChannelSftp.LsEntry;
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import javax.servlet.http.Part;
+import org.apache.commons.fileupload.FileItem;
 
 /**
  *
@@ -59,16 +62,42 @@ public class JschSftpConnect {
             session.disconnect();
     }
     
-    public String listDirectory() throws Exception {
+    public void makeDirectory(String name) {
+        try {
+            channel.mkdir("./" + name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public String listDirectory() {
         String s = ""; 
         try {
             final Vector<LsEntry> files = channel.ls(".");
-            for (LsEntry obj : files) {
-                s += obj.toString() + "<br>\n";
+            s += "<h3>" + channel.pwd() + "</h3>\n";
+            for (LsEntry entry : files) {
+                s += entry.getFilename() + "<br>\n";
             }
         } catch (Exception e) {
             s = "Failed to read from directory";
         }
         return s;
     }
+    
+    public void upload(FileItem fi, String fileName) {
+        try { 
+            channel.cd(".");
+            InputStream inputStream = fi.getInputStream();
+            channel.put(inputStream, fileName);
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    //http://www.javaxp.com/2015/06/jsch-uploaddownload-files-from-remote.html
+    public void download(String directory, String downloadFile, String saveFile) {
+        
+    }
+    
 }

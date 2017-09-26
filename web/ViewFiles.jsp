@@ -24,18 +24,18 @@
         <jsp:include page="Menu.jsp" />
         <div>
             <h2>View Files</h2>
-            <form>
-                <table>
-                    <tr>
-                        <td><input class="inputWidth" type="text" name="searchString"></td>
-                        <td><input type="submit" value="Search"><td>
-                    </tr>
-                </table>
+            
+            <p><%=s%></p> <!-- print file list -->
+            
+            <form action="MakeDirectory.jsp" method="post">
+                <input class="inputWidth" type="text" name="folderName">
+                <input type="submit" value="New Folder">
             </form>
             
-            <p><%=s%></p>
-            
-            <form>
+            <h2>Upload File</h2>
+            <p>Select a File to upload</p>
+            <form action="UploadFile.jsp" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileName" size="50">
                 <input type="submit" value="Upload File">
             </form>
         </div>
