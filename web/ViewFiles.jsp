@@ -5,12 +5,20 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="sftp.JschSftpConnect"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Files</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
+        <%
+            JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");
+            // when sftp server allows, change to directory, username and password of the current user
+            String s = connection.listDirectory();
+            connection.closeConnection();
+        %>
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
@@ -25,7 +33,7 @@
                 </table>
             </form>
             
-            <p>file list goes here</p>
+            <p><%=s%></p>
             
             <form>
                 <input type="submit" value="Upload File">
