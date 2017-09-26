@@ -15,6 +15,10 @@
         <jsp:include page="Menu.jsp" />
         <div>
             <h2>Register</h2>
+            <%
+                String answer = request.getParameter("answer");
+            %>
+            <% if (answer.equals("31261")) { %>
             <form action="RegisterAction.jsp" method="post">
                 <table class="tableRegister">
                     <tr>
@@ -43,6 +47,10 @@
                     </tr>
                 </table>
             </form>
+            <% } else { %>
+            <p>Secret answer is incorrect. Please try again.</p>
+            <% }
+            %>
         </div>
 
     </body>

@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String privilege;
     @XmlElement(name = "verify")
     private String verify;
-    private static int workload = 12;
+    //private static int workload = 12;
 
     public User() {
     }

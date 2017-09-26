@@ -18,7 +18,7 @@
         <ul>
             <li><a href="Home.jsp">Home</a></li>
             <li class="right"><a href="Login.jsp">Login</a></li>
-            <li class="right"><a href="Register.jsp">Register</a></li>
+            <li class="right"><a href="verifyRegister.jsp">Register</a></li>
         </ul>
         <% } else {
             User user = (User) session.getAttribute("user");

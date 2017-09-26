@@ -31,7 +31,7 @@
             </jsp:useBean>
 
             <%
-                if (verify == "31261") {
+                
                     Users users = registerApp.getUsers();
                     if (users.getUser(email) == null) {
                         User user = new User(name, email, password, mac);
@@ -43,9 +43,6 @@
                         response.sendRedirect("Home.jsp");
                     } else { %>
             <p>Sorry. That email has already been registered.</p>
-            <% }%>
-            <% } else { %>
-            <p>Secret answer is incorrect. Please try again.</p>
             <% }%>
         </div>
     </body>
