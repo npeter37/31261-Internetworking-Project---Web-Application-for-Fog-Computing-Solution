@@ -37,6 +37,8 @@
                         User user = new User(name, email, password, mac);
                         session.setAttribute("user", user);
                         users.addUser(user);
+                        //String old_password = user.getPassword();
+                        //user.setPassword(old_password);
                         registerApp.updateXML(users);
                         response.sendRedirect("Home.jsp");
                     } else { %>

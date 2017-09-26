@@ -3,13 +3,16 @@ package user;
 import java.util.*;
 import java.io.Serializable;
 import javax.xml.bind.annotation.*;
+import org.mindrot.jbcrypt.BCrypt;
 
 @XmlRootElement(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Users implements Serializable {
 
+
     @XmlElement(name = "user")
     private ArrayList<User> list = new ArrayList<User>();
+
 
     public ArrayList<User> getList() {
         return list;
@@ -31,7 +34,7 @@ public class Users implements Serializable {
         }
         return null;
     }
-    
+
     public User login(String email, String password) {
         // For each user in the list...
         for (User user : list) {
@@ -41,4 +44,18 @@ public class Users implements Serializable {
         }
         return null; // Login incorrect. Return null.
     }
+
+    //public static String Hashpw(String password) throws IllegalArgumentException {
+        //String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+        //return hashed_pw;
+    //}
+
+    /*public static boolean checkpw(String plain_pw, String hashed) {
+        boolean verified_pw = false;
+        
+        if (null == hashed) 
+            throw new java.lang.IllegalArgumentException("Invalid Hash provided for comparison");
+        verified_pw = BCrypt.checkpw(plain_pw,hashed);
+        return verified_pw;
+    }*/
 }

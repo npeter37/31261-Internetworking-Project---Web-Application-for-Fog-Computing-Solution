@@ -1,11 +1,11 @@
 package user;
 
-
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.mindrot.jbcrypt.BCrypt;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String privilege;
     @XmlElement(name = "verify")
     private String verify;
-
+    private static int workload = 12;
 
     public User() {
     }
@@ -41,7 +41,8 @@ public class User implements Serializable {
         this.privilege = "user";
         this.verify = verify;
     }
-       public String getName() {
+
+    public String getName() {
         return name;
     }
 
@@ -62,8 +63,14 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
+        //String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
         this.password = password;
     }
+
+    //public static String Hashpw(String password) throws IllegalArgumentException {
+       // String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+        //return hashed_pw;
+    //}
 
     public String getMac() {
         return mac;
