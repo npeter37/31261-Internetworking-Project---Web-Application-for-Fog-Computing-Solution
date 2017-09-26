@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String privilege;
     @XmlElement(name = "verify")
     private String verify;
-    //private static int workload = 12;
+    private static int workload = 12;
 
     public User() {
     }
@@ -63,8 +63,8 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        //String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
-        this.password = password;
+        String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+        this.password = hashed_pw;
     }
 
     //public static String Hashpw(String password) throws IllegalArgumentException {

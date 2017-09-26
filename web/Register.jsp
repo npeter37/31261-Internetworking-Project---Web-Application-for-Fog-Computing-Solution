@@ -38,10 +38,6 @@
                         <td><input class="inputWidth" type="text" minlength="6" maxlength="24" name="mac" required></td>
                     </tr>
                     <tr>
-                        <td><label class="field" for="verify">What is the subject number of this subject?</label></td>
-                        <td><input class="inputWidth" type="text" name="verify" required></td>
-                    </tr>
-                    <tr>
                         <td></td>
                         <td><input type="submit" value="Register"></td>
                     </tr>

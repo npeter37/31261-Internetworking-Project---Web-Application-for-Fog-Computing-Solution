@@ -16,6 +16,7 @@
         <div>
             <h2>Verify</h2>
             <form action="Register.jsp" method="post">
+                <p>Please answer the secret question before proceeding to register.</p>
                 <table class="tableRegister">
                     <tr>
                         <td><label class="field" for="answer">What is the subject number of this subject?</label></td>

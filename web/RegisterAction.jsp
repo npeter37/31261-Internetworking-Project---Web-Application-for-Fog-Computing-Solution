@@ -30,15 +30,14 @@
                 <jsp:setProperty name="registerApp" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
             </jsp:useBean>
 
-            <%
-                
+            <%     
                     Users users = registerApp.getUsers();
                     if (users.getUser(email) == null) {
                         User user = new User(name, email, password, mac);
                         session.setAttribute("user", user);
                         users.addUser(user);
-                        //String old_password = user.getPassword();
-                        //user.setPassword(old_password);
+                        String new_password = user.getPassword();
+                        user.setPassword(new_password);
                         registerApp.updateXML(users);
                         response.sendRedirect("Home.jsp");
                     } else { %>
