@@ -45,6 +45,13 @@
                 <input type="file" name="fileName" size="50">
                 <input type="submit" value="Upload File">
             </form>
+            
+            <h2>Download File</h2>
+            <p>Select a File to upload</p>
+            <form action="DownloadFile.jsp" method="get">
+                <input type="text" name="fileName" size="50">
+                <input type="submit" value="Download File">
+            </form>
         </div>
     </body>
 </html>

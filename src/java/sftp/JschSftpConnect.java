@@ -30,16 +30,11 @@ public class JschSftpConnect {
         
         JSch jsch = new JSch();
         
-        //String host = "127.0.0.1";
-        //String username = "tester";
-        //String password = "password";
-    
         // set properties
         Properties config = new Properties();
         config.put("StrictHostKeyChecking", "no");
         config.put("compression.s2c", "zlib,none");
         config.put("compression.c2s", "zlib,none");
-
         
         try {
             // create the session
@@ -47,7 +42,6 @@ public class JschSftpConnect {
             session.setConfig(config);
             session.setPassword(password);
             session.connect();
-
 
             // open the channel
             channel = (ChannelSftp) session.openChannel("sftp");
@@ -58,6 +52,7 @@ public class JschSftpConnect {
     }
     
     public void closeConnection() {
+        user = null;
         if (channel != null)
             channel.disconnect();
         if (session != null)
@@ -98,8 +93,20 @@ public class JschSftpConnect {
     }
     
     //http://www.javaxp.com/2015/06/jsch-uploaddownload-files-from-remote.html
-    public void download(String directory, String downloadFile, String saveFile) {
-        
+    public void download(String fileName, OutputStream os) {
+        byte[] buffer = new byte[1024];
+        try {
+            channel.cd(".");
+            BufferedInputStream bis = new BufferedInputStream(channel.get(fileName));
+            BufferedOutputStream bos = new BufferedOutputStream(os);
+            int readCount;
+            while ((readCount = bis.read(buffer)) > 0) {
+                bos.write(buffer, 0, readCount);
+            }
+            bis.close();
+            bos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
 }
