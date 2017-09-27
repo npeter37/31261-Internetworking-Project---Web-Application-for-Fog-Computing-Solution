@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
+        <link rel="stylesheet" href="css/MainFormat.css" />
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
