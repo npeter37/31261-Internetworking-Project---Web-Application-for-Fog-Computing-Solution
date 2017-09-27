@@ -14,12 +14,13 @@
         <title>View Files</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
         <%
+            String s = "";
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("Home.jsp");
             } else { 
                 JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");
                 // when sftp server allows, change to directory, username and password of the current user
-                String s = connection.listDirectory();
+                s = connection.listDirectory();
                 connection.closeConnection();
             }
         %>
