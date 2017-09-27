@@ -21,50 +21,54 @@
         <link rel="stylesheet" href="css/MainFormat.css" />
         
         <%
-            File file;
-            int maxFileSize = 5000 * 1024;
-            int maxMemSize = 5000 * 1024;
-            String filePath = ".\\";
-            String contentType = request.getContentType();
-            
-            if ((contentType.indexOf("multipart/form-data") >= 0)) {
-                DiskFileItemFactory factory = new DiskFileItemFactory();
-                factory.setSizeThreshold(maxMemSize);
-                
-                factory.setRepository(new File("c:\\temp"));
-                
-                ServletFileUpload upload = new ServletFileUpload(factory);
-                
-                upload.setSizeMax(maxFileSize);
-                
-                try {
-                    List fileItems = upload.parseRequest(request);
-                    
-                    Iterator i = fileItems.iterator();
-                    
-                    JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");        
-                    while (i.hasNext()) {
-                        FileItem fi = (FileItem)i.next();
-                        if (!fi.isFormField()) {
-                            String fieldName = fi.getFieldName();
-                            String fileName = fi.getName();
-                            boolean isInMemory = fi.isInMemory();
-                            long sizeInBytes = fi.getSize();
-                            
-                            // write the file
-                            if (fileName.lastIndexOf("\\") >= 0) {
-                                file = new File (filePath + fileName.substring(fileName.lastIndexOf("\\")));
-                            } else {
-                                file = new File (filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home.jsp");
+            } else {
+                File file;
+                int maxFileSize = 5000 * 1024;
+                int maxMemSize = 5000 * 1024;
+                String filePath = ".\\";
+                String contentType = request.getContentType();
+
+                if ((contentType.indexOf("multipart/form-data") >= 0)) {
+                    DiskFileItemFactory factory = new DiskFileItemFactory();
+                    factory.setSizeThreshold(maxMemSize);
+
+                    factory.setRepository(new File("c:\\temp"));
+
+                    ServletFileUpload upload = new ServletFileUpload(factory);
+
+                    upload.setSizeMax(maxFileSize);
+
+                    try {
+                        List fileItems = upload.parseRequest(request);
+
+                        Iterator i = fileItems.iterator();
+
+                        JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");        
+                        while (i.hasNext()) {
+                            FileItem fi = (FileItem)i.next();
+                            if (!fi.isFormField()) {
+                                String fieldName = fi.getFieldName();
+                                String fileName = fi.getName();
+                                boolean isInMemory = fi.isInMemory();
+                                long sizeInBytes = fi.getSize();
+
+                                // write the file
+                                if (fileName.lastIndexOf("\\") >= 0) {
+                                    file = new File (filePath + fileName.substring(fileName.lastIndexOf("\\")));
+                                } else {
+                                    file = new File (filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
+                                }
+                                connection.upload(fi, fileName);
                             }
-                            connection.upload(fi, fileName);
+                            connection.closeConnection();
                         }
-                        connection.closeConnection();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        response.sendRedirect("ViewFiles.jsp");
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    response.sendRedirect("ViewFiles.jsp");
                 }
             }
         %>

@@ -14,12 +14,16 @@
         <link rel="stylesheet" href="css/MainFormat.css" />
         
         <%
-            String folderName = request.getParameter("folderName");
-            JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");
-            // when sftp server allows, change to directory, username and password of the current user
-            connection.makeDirectory(folderName);
-            connection.closeConnection();
-            response.sendRedirect("ViewFiles.jsp");
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home.jsp");
+            } else {
+                String folderName = request.getParameter("folderName");
+                JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");
+                // when sftp server allows, change to directory, username and password of the current user
+                connection.makeDirectory(folderName);
+                connection.closeConnection();
+                response.sendRedirect("ViewFiles.jsp");
+            }
         %>
     </head>
     <body>
