@@ -4,6 +4,7 @@
     Author     : Peter Nguyen
 --%>
 
+<%@page import="user.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sftp.JschSftpConnect"%>
 
@@ -17,8 +18,9 @@
             String s = "";
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("Home.jsp");
-            } else { 
-                JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");
+            } else {
+                User user = (User) session.getAttribute("user");
+                JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);
                 // when sftp server allows, change to directory, username and password of the current user
                 s = connection.listDirectory();
                 connection.closeConnection();

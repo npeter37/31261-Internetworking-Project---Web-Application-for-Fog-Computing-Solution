@@ -45,7 +45,8 @@
 
                         Iterator i = fileItems.iterator();
 
-                        JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password");        
+                        User user = (User) session.getAttribute("user");
+                        JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);        
                         while (i.hasNext()) {
                             FileItem fi = (FileItem)i.next();
                             if (!fi.isFormField()) {

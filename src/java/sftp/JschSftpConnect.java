@@ -11,9 +11,8 @@ import com.jcraft.jsch.*;
 import com.jcraft.jsch.ChannelSftp.LsEntry;
 import java.util.*;
 import java.io.*;
-import java.util.logging.Level;
-import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
+import user.User;
 
 /**
  *
@@ -22,10 +21,13 @@ import org.apache.commons.fileupload.FileItem;
 
 public class JschSftpConnect {
     
-    Session session;
-    ChannelSftp channel;
+    private Session session;
+    private ChannelSftp channel;
+    private User user;
     
-    public JschSftpConnect (String host, String username, String password) {
+    public JschSftpConnect (String host, String username, String password, User user) {
+        this.user = user;
+        
         JSch jsch = new JSch();
         
         //String host = "127.0.0.1";
