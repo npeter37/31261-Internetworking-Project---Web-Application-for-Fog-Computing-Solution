@@ -4,6 +4,7 @@
     Author     : James
 --%>
 
+<%@page import="user.User"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>

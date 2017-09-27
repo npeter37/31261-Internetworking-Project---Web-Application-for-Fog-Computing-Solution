@@ -47,7 +47,7 @@
             </form>
             
             <h2>Download File</h2>
-            <p>Select a File to upload</p>
+            <p>Select a File to Download</p>
             <form action="DownloadFile.jsp" method="post">
                 <input type="text" name="fileName" size="50">
                 <input type="submit" value="Download File">
