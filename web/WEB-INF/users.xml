@@ -9,13 +9,17 @@ and open the template in the editor.
         <name>Fog Comptuing</name>
         <email>fogcomputing@gmail.com</email>
         <password>password123</password>
+        <hashed_pw></hashed_pw>
         <mac></mac>
+        <secretanswer>test</secretanswer>
         <privilege>user</privilege>
     </user>
     <user>
         <name>Admin</name>
         <email>admin@gmail.com</email>
         <password>password123</password>
+        <hashed_pw>password123</hashed_pw>
+        <secretanswer>test</secretanswer>
         <mac></mac>
         <privilege>admin</privilege>
     </user>
@@ -23,6 +27,8 @@ and open the template in the editor.
         <name>Test</name>
         <email>test@gmail.com</email>
         <password>password123</password>
+        <secretanswer>test</secretanswer>
+        <hashed_pw>password123</hashed_pw>
         <mac></mac>
         <privilege>user</privilege>
     </user>

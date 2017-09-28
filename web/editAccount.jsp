@@ -26,6 +26,7 @@
                 String email = user.getEmail();
                 String password = user.getPassword();
                 String mac = user.getMac();
+                String secretanswer= user.getSecretanswer();
 
                 if (request.getParameter("edit") != null) {
                     session.setAttribute("user", user);
@@ -34,6 +35,7 @@
                     user.setEmail(email);
                     user.setPassword(password);
                     user.setMac(mac);
+                    user.setSecretanswer(secretanswer);
 
                     getUser.updateXML(updateUser);
                     response.sendRedirect("results.jsp");
@@ -57,6 +59,10 @@
                     <tr>
                         <td><label class="field" for="mac">MAC Address of Device</label></td>
                         <td><input class="inputWidth" value="<%=mac%>" minlength="6" maxlength="24" type="text" name="mac" required></td>
+                    </tr>
+                    <tr>
+                        <td><label class="field" for="secretanswer">The following answer will your secret answer. What is your secret?</label></td>
+                        <td><input class="inputWidth" value="<%=secretanswer%>" type="text" name="secretanswer" required></td>
                     </tr>
                     <tr>
                         <td></td>

@@ -28,18 +28,44 @@ public class User implements Serializable {
     private String privilege;
     @XmlElement(name = "verify")
     private String verify;
+    @XmlElement(name = "hashed_pw")
+    private String hashed_pw;
+    @XmlElement(name = "secretanswer")
+    private String secretanswer;
+
+    public String getSecretanswer() {
+        return secretanswer;
+    }
+
+    public void setSecretanswer(String secretanswer) {
+        this.secretanswer = secretanswer;
+    }
+
+    public String getHashed_pw() {
+        return hashed_pw;
+    }
+
+    public void setHashed_pw(String password) {
+        String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+        this.hashed_pw = hashed_pw;
+    }
+
+    public static void setWorkload(int workload) {
+        User.workload = workload;
+    }
     private static int workload = 12;
 
     public User() {
     }
 
-    public User(String name, String email, String password, String mac) {
+    public User(String name, String email, String password, String mac, String secretanswer) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.mac = mac;
+        this.secretanswer = secretanswer;
         this.privilege = "user";
-        this.verify = verify;
+        this.hashed_pw = hashed_pw;
     }
 
     public String getName() {
@@ -63,8 +89,8 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
-        this.password = hashed_pw;
+        //String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+        this.password = password;
     }
 
     //public static String Hashpw(String password) throws IllegalArgumentException {
@@ -77,7 +103,8 @@ public class User implements Serializable {
     }
 
     public void setMac(String mac) {
-        this.mac = mac;
+        String hashed_mac = BCrypt.hashpw(mac, BCrypt.gensalt(workload));
+        this.mac = hashed_mac;
     }
 
     public String getPrivilege() {

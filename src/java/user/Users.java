@@ -8,11 +8,13 @@ import org.mindrot.jbcrypt.BCrypt;
 @XmlRootElement(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Users implements Serializable {
-
+    
+    private static int workload = 12;
+    
+    private static int loginAttempts =  3;
 
     @XmlElement(name = "user")
     private ArrayList<User> list = new ArrayList<User>();
-
 
     public ArrayList<User> getList() {
         return list;
@@ -44,18 +46,26 @@ public class Users implements Serializable {
         }
         return null; // Login incorrect. Return null.
     }
-
+    
     //public static String Hashpw(String password) throws IllegalArgumentException {
-        //String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
-        //return hashed_pw;
+    //String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+    //return hashed_pw;
     //}
 
-    /*public static boolean checkpw(String plain_pw, String hashed) {
-        boolean verified_pw = false;
-        
-        if (null == hashed) 
-            throw new java.lang.IllegalArgumentException("Invalid Hash provided for comparison");
-        verified_pw = BCrypt.checkpw(plain_pw,hashed);
-        return verified_pw;
-    }*/
+
+    public User loginhashed(String email, String password) {
+        // For each user in the list...
+        for (User user : list) {
+            String hashed_pw = user.getHashed_pw();
+            if (user.getEmail().equals(email)) {
+                //String hashed_pw = BCrypt.checkpw(password, hashed);
+                if (BCrypt.checkpw(password, hashed_pw)) {
+                    return user;
+                }
+                return null;
+            }
+        }
+        return null; // Login incorrect. Return null.
+    }
 }
+//user.getPassword().equals(BCrypt.checkpw(password, hashed_pw)

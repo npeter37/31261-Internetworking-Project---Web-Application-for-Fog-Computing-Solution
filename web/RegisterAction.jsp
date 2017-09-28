@@ -26,6 +26,7 @@
                 String password = request.getParameter("password");
                 String mac = request.getParameter("mac");
                 String verify = request.getParameter("verify");
+                String secretanswer = request.getParameter("secretanswer");
             %>
             <jsp:useBean id="registerApp" class="user.UsersApp" scope="session">
                 <jsp:setProperty name="registerApp" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
@@ -34,11 +35,11 @@
             <%     
                     Users users = registerApp.getUsers();
                     if (users.getUser(email) == null) {
-                        User user = new User(name, email, password, mac);
+                        User user = new User(name, email, password, mac, secretanswer);
                         session.setAttribute("user", user);
                         users.addUser(user);
-                        String new_password = user.getPassword();
-                        user.setPassword(new_password);
+                        //String new_password = user.getPassword();
+                        user.setHashed_pw(password); //hashes the password
                         registerApp.updateXML(users);
                         response.sendRedirect("Home.jsp");
                     } else { %>

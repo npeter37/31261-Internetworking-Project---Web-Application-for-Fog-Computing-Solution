@@ -39,6 +39,10 @@
                         <td><input class="inputWidth" type="text" minlength="6" maxlength="24" name="mac" required></td>
                     </tr>
                     <tr>
+                        <td><label class="field" for="secretanswer">The following answer will your secret answer. What is your secret?</label></td>
+                        <td><input class="inputWidth" type="text" name="secretanswer" required></td>
+                    </tr>
+                    <tr>
                         <td></td>
                         <td><input type="submit" value="Register"></td>
                     </tr>
