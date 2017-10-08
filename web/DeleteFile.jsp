@@ -20,7 +20,7 @@
             } else {
                 User user = (User) session.getAttribute("user");
                 String fileName = request.getParameter("fileName");
-                JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);
+                JschSftpConnect connection = new JschSftpConnect(user);
                 // when sftp server allows, change to directory, username and password of the current user
                 connection.deleteFile(fileName);
                 connection.closeConnection();

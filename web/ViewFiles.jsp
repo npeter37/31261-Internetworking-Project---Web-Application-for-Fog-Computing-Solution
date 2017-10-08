@@ -20,7 +20,7 @@
                 response.sendRedirect("Home.jsp");
             } else {
                 User user = (User) session.getAttribute("user");
-                JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);
+                JschSftpConnect connection = new JschSftpConnect(user);
                 // when sftp server allows, change to directory, username and password of the current user
                 s = connection.listDirectory();
                 connection.closeConnection();

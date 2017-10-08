@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.mindrot.jbcrypt.BCrypt;
+import sftp.JschSftpConnect;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -68,6 +69,13 @@ public class User implements Serializable {
         this.secretanswer = secretanswer;
         this.privilege = "user";
         this.hashed_pw = hashed_pw;
+        createUserDirectory();
+    }
+    
+    private void createUserDirectory() {
+        JschSftpConnect connection = new JschSftpConnect(this);
+        connection.newUserDirectory(name);
+        connection.closeConnection();
     }
 
     public String getName() {

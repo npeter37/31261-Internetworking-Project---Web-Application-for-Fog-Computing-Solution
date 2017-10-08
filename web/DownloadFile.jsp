@@ -19,7 +19,7 @@
             String fileName = (String)request.getParameter("fileName");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
             User user = (User) session.getAttribute("user");
-            JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);
+            JschSftpConnect connection = new JschSftpConnect(user);
             OutputStream os = response.getOutputStream();
             connection.download(fileName, os);
             connection.closeConnection();

@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <users>
     <user>
-        <name>Fog Comptuing</name>
+        <name>Fog Computing</name>
         <email>fogcomputing@gmail.com</email>
         <password>password123</password>
         <hashed_pw></hashed_pw>

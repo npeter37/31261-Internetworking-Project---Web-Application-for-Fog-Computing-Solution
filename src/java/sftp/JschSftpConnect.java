@@ -26,8 +26,12 @@ public class JschSftpConnect {
     private User user;
     private String workingDirectory;
     
-    public JschSftpConnect (String host, String username, String password, User user) {
+    public JschSftpConnect (User user) {
         this.user = user;
+        this.workingDirectory = "./" + user.getName();
+        String host = "127.0.0.1";
+        String username = "tester";
+        String password = "password";
         
         JSch jsch = new JSch();
         
@@ -60,9 +64,17 @@ public class JschSftpConnect {
             session.disconnect();
     }
     
-    public void makeDirectory(String name) {
+    public void newUserDirectory(String name) {
         try {
             channel.mkdir("./" + name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void makeDirectory(String name) {
+        try {
+            channel.mkdir(workingDirectory + "/" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,8 +92,8 @@ public class JschSftpConnect {
         String files = "<div id=\"files\"><table>";
         String directories = "<div id=\"directories\"><ul>";
         try {
-            final Vector<LsEntry> entries = channel.ls(".");
-            workingDirectory = channel.pwd();
+            final Vector<LsEntry> entries = channel.ls(workingDirectory);
+            //workingDirectory = channel.pwd();
             
             for (LsEntry entry : entries) {
                 if (entry.getAttrs().isDir()) {
@@ -115,7 +127,7 @@ public class JschSftpConnect {
     
     public void upload(FileItem fi, String fileName) {
         try { 
-            channel.cd(".");
+            channel.cd(workingDirectory);
             InputStream inputStream = fi.getInputStream();
             channel.put(inputStream, fileName);
             inputStream.close();
@@ -128,7 +140,7 @@ public class JschSftpConnect {
     public void download(String fileName, OutputStream os) {
         byte[] buffer = new byte[1024];
         try {
-            channel.cd(".");
+            channel.cd(workingDirectory);
             BufferedInputStream bis = new BufferedInputStream(channel.get(fileName));
             BufferedOutputStream bos = new BufferedOutputStream(os);
             int readCount;
