@@ -17,7 +17,7 @@
         <jsp:useBean id="getUser" class="user.UsersApp" scope="application">
             <jsp:setProperty name="getUser" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
         </jsp:useBean>
-        <div>
+        <div id="content">
             <h2>Account Details</h2>
             <%
                 User user = (User) session.getAttribute("user");

@@ -25,7 +25,6 @@
             OutputStream os = response.getOutputStream();
             connection.download(fileName, os);
             connection.closeConnection();
-            
         %>
     </head>
     <body>

@@ -1,48 +1,35 @@
 <%-- 
-    Document   : Upload
-    Created on : 13/09/2017, 12:18:14 AM
-    Author     : Peter Nguyen
+    Document   : MakeDirectory
+    Created on : 26/09/2017, 5:06:04 PM
+    Author     : James
 --%>
 
 <%@page import="user.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sftp.JschSftpConnect"%>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Files</title>
+        <title>Delete File</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
+        
         <%
-            String s = "";
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("Home.jsp");
             } else {
                 User user = (User) session.getAttribute("user");
+                String fileName = request.getParameter("fileName");
                 JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);
                 // when sftp server allows, change to directory, username and password of the current user
-                s = connection.listDirectory();
+                connection.deleteFile(fileName);
                 connection.closeConnection();
+                response.sendRedirect("ViewFiles.jsp");
             }
         %>
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div id="content">
-            <%=s%> <!-- print file list -->
-            
-            <form action="MakeDirectory.jsp" method="post">
-                <input class="inputWidth" type="text" name="folderName">
-                <input type="submit" value="New Folder">
-            </form>
-            
-            <h2>Upload File</h2>
-            <p>Select a File to upload</p>
-            <form action="UploadFile.jsp" method="post" enctype="multipart/form-data">
-                <input type="file" name="fileName" size="50">
-                <input type="submit" value="Upload File">
-            </form>
-        </div>
+        <p>Deleting File...</p>
     </body>
 </html>

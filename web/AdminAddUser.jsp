@@ -40,7 +40,7 @@
         <% }%>
         <% } else { %>
         <% }%>
-        <div>
+        <div id="content">
             <h2>Add User to the Cloud</h2>
             <form action="AdminAddUser.jsp" method="post">
                 <table class="tableRegister">

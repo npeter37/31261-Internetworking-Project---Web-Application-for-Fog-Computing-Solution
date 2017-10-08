@@ -19,7 +19,7 @@
             <jsp:setProperty name="userApp" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
         </jsp:useBean>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>Remove a User</h2>
             <%
                 if (request.getParameter("removeUser") != null) {

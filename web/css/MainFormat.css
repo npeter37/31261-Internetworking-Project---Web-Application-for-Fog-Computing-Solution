@@ -8,86 +8,63 @@ and open the template in the editor.
     Author     : Peter Nguyen
 */
 
-body {
-    background-color: #D3D3D3;
+body, html {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    min-width: 800px;
+    background-color: #F5F5F5;
 }
 
-h1 {
-    text-align:center;
+#header {
+    width: 80%;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
 }
-ul {
+
+#heading h1 {
+    float: left;
+}
+
+#heading p {
+    float: right;
+}
+
+#menu ul {
+    width: 100%;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333333;
-    width: 70%;
-    position: absolute;
-    left: 15%;
+    border-radius: 2px;
 }
-li {
+
+#menu li {
     float: left;
-    border-right: 1px solid #bbb;
-    width:100px;
+    border: 1px solid #A9A9A9;
 }
 
-li a{
+#menu li a {
     display: block;
-    color: white;
+    color: #000000;
     text-align: center;
-    padding: 20px 20px;
+    padding: 10px 30px;
     text-decoration: none;
-}
-li a:hover {
-    background-color: #111111;
+    background-color: #D3D3D3;
 }
 
-li.right {
+#menu li a:hover {
+    background-color: #00BFFF;
+}
+
+#menu li.right {
     float: right;
-    text-align: center;
 }
 
-li.right1 {
-    float: right;
-    text-align: center;
-    width:250px;
-    
-}
-
-li:last-child {
-    border-left: 1px solid #bbb;
-}
-
-div {
-    position: fixed;
-    border:1px solid black;
-    background-color: white;
-    top: 23%;
-    width: 70%;
-    left: 15%;
-    padding-bottom: 30%;
-}
-
-h2 {
-    text-align: center;
-}
-p{
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.pCenter {
-    text-align: center;
-}
-.tableRegister {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.inputWidth{
-    width:300px;
-    padding: 8px 10px;
-}
-input[type=submit] {
-    position: absolute;
-    cursor: pointer;
-    width:36.3%;
+#content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #FFFFFF;
 }

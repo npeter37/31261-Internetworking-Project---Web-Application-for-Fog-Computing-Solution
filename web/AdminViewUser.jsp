@@ -17,7 +17,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>View Users on the Cloud</h2>
             <c:import url="WEB-INF/viewUsers.xsl" var="xslt"/>
             <c:import url="WEB-INF/users.xml"

@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>Administrator</h2>
             <p>Only administrators are granted access to this page and the administrative functions. Click on the following links to perform the following functions.</p>
             <p class="pCenter"><a href="AdminAddUser.jsp">Add New User</a></p>
