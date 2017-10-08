@@ -67,6 +67,14 @@ public class JschSftpConnect {
         }
     }
     
+    public void deleteFile(String fileName) {
+        try {
+            channel.rm(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public String listDirectory() {
         String s = ""; 
         try {
@@ -80,6 +88,11 @@ public class JschSftpConnect {
                 s += "<form action=\"DownloadFile.jsp\" method=\"post\">";
                 s += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
                 s += "<input type=\"submit\" value=\"Download\">";
+                s += "</form>";
+                s += "</td><td>";
+                s += "<form action=\"DeleteFile.jsp\" method=\"post\">";
+                s += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
+                s += "<input type=\"submit\" value=\"Delete\">";
                 s += "</form>";
                 s += "</td>";
                 s += "</tr>";
