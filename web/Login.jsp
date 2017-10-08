@@ -4,12 +4,14 @@
     Author     : Peter Nguyen
 --%>
 <%@page import ="user.*" contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="sftp.JschSftpConnect"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
+        <jsp:useBean id="sftpConnection" class="sftp.JschSftpConnect" scope="session"></jsp:useBean>
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
@@ -29,6 +31,12 @@
                         String answer = user.getSecretanswer();
                         if (request.getParameter("secretanswer").equals(answer)) {
                             session.setAttribute("user", user);
+                            %>
+                            
+                            <jsp:setProperty name="sftpConnection" property="user" value="<%=user%>"/>
+                            <jsp:setProperty name="sftpConnection" property="workingDirectory" value="<%=user.getEmail()%>"/>
+                            
+                            <%
                             response.sendRedirect("Home.jsp");
                         } else {
                             response.sendRedirect("Login.jsp");

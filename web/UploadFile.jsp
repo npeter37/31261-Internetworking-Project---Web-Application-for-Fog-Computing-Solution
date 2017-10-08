@@ -46,8 +46,7 @@
 
                         Iterator i = fileItems.iterator();
 
-                        User user = (User) session.getAttribute("user");
-                        JschSftpConnect connection = new JschSftpConnect(user);        
+                        JschSftpConnect connection = (JschSftpConnect) session.getAttribute("sftpConnection");        
                         while (i.hasNext()) {
                             FileItem fi = (FileItem)i.next();
                             if (!fi.isFormField()) {
@@ -64,7 +63,6 @@
                                 }
                                 connection.upload(fi, fileName);
                             }
-                            connection.closeConnection();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

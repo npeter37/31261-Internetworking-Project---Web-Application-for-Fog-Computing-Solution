@@ -18,11 +18,9 @@
             response.setContentType("application/octet-stream");
             String fileName = (String)request.getParameter("fileName");
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-            User user = (User) session.getAttribute("user");
-            JschSftpConnect connection = new JschSftpConnect(user);
+            JschSftpConnect connection = (JschSftpConnect) session.getAttribute("sftpConnection");
             OutputStream os = response.getOutputStream();
             connection.download(fileName, os);
-            connection.closeConnection();
             response.sendRedirect("ViewFiles.jsp");
         %>
     </head>

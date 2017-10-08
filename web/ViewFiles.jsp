@@ -14,24 +14,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Files</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
-        <%
-            String s = "";
-            if (session.getAttribute("user") == null) {
-                response.sendRedirect("Home.jsp");
-            } else {
-                User user = (User) session.getAttribute("user");
-                JschSftpConnect connection = new JschSftpConnect(user);
-                // when sftp server allows, change to directory, username and password of the current user
-                s = connection.listDirectory();
-                connection.closeConnection();
-            }
-        %>
+            
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
         <div id="content">
-            <%=s%> <!-- print file list -->
-            
+            <!-- print file list -->
+            <jsp:getProperty name="sftpConnection" property="directories"/>
+            <jsp:getProperty name="sftpConnection" property="files"/>
             <form action="MakeDirectory.jsp" method="post">
                 <input class="inputWidth" type="text" name="folderName">
                 <input type="submit" value="New Folder">

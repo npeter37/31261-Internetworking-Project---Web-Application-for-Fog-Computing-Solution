@@ -20,10 +20,9 @@
             } else {
                 User user = (User) session.getAttribute("user");
                 String folderName = request.getParameter("folderName");
-                JschSftpConnect connection = new JschSftpConnect(user);
                 // when sftp server allows, change to directory, username and password of the current user
+                JschSftpConnect connection = (JschSftpConnect) session.getAttribute("sftpConnection");
                 connection.makeDirectory(folderName);
-                connection.closeConnection();
                 response.sendRedirect("ViewFiles.jsp");
             }
         %>

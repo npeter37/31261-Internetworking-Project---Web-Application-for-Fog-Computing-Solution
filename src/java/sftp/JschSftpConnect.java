@@ -19,16 +19,29 @@ import user.User;
  * @author James
  */
 
-public class JschSftpConnect {
+public class JschSftpConnect implements Serializable {
     
     private Session session;
     private ChannelSftp channel;
     private User user;
-    private String workingDirectory;
+    private String workingDirectory = ".";
     
-    public JschSftpConnect (User user) {
+    
+    public JschSftpConnect () {
+        
+    }
+    
+    //public JschSftpConnect (User user) {
+    //    this.user = user;
+    //    workingDirectory = "./" + user.getEmail();
+    //    openConnection();
+    //}
+    
+    public void setUser(User user) {
         this.user = user;
-        this.workingDirectory = "./" + user.getName();
+    }
+    
+    public void openConnection() {
         String host = "127.0.0.1";
         String username = "tester";
         String password = "password";
@@ -57,48 +70,90 @@ public class JschSftpConnect {
     }
     
     public void closeConnection() {
-        user = null;
         if (channel != null)
             channel.disconnect();
         if (session != null)
             session.disconnect();
     }
     
+    public void setWorkingDirectory(String workingDirectory) {
+        if (workingDirectory.equals(".")) {
+            this.workingDirectory = "./" + user.getEmail();
+        } else if (workingDirectory.equals("..")) {
+            int endIndex = this.workingDirectory.lastIndexOf("/");
+            if (endIndex != -1) {
+                this.workingDirectory = this.workingDirectory.substring(0,endIndex);
+            } else {
+                this.workingDirectory = "./" + user.getEmail();
+            }
+        } else { 
+            this.workingDirectory += "/" + workingDirectory;
+        }
+        if (!this.workingDirectory.contains("./" + user.getEmail()))
+            this.workingDirectory = "./" + user.getEmail();
+    }
+    
     public void newUserDirectory(String name) {
+        openConnection();
         try {
             channel.mkdir("./" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        closeConnection();
     }
     
     public void makeDirectory(String name) {
+        openConnection();
         try {
             channel.mkdir(workingDirectory + "/" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        closeConnection();
     }
     
     public void deleteFile(String fileName) {
+        openConnection();
         try {
             channel.rm(fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        closeConnection();
     }
     
-    public String listDirectory() {
-        String files = "<div id=\"files\"><table>";
-        String directories = "<div id=\"directories\"><ul>";
+    public String getDirectories() {
+        openConnection();
+        String directories = workingDirectory + "<div id=\"directories\"><ul>";
+        System.out.println(workingDirectory);
         try {
             final Vector<LsEntry> entries = channel.ls(workingDirectory);
-            //workingDirectory = channel.pwd();
-            
             for (LsEntry entry : entries) {
                 if (entry.getAttrs().isDir()) {
-                    directories += "<li>" + entry.getFilename() + "</li>";
-                } else {
+                    directories += "<li>";
+                    directories += "<form action=\"ChangeDirectory.jsp\" method=\"post\">";
+                    directories += "<input type=\"hidden\" name=\"workingDirectory\" value=\"" + entry.getFilename() + "\">";
+                    directories += "<input type=\"submit\" value=\"" + entry.getFilename() + "\">";
+                    directories += "</form></li>";
+                }
+            }
+        } catch (Exception e) {
+            directories = "<p>Failed to read from directory" + workingDirectory + "</p>";
+        }
+        directories += "</ul></div>";
+        closeConnection();
+        return directories;
+    }
+    
+    public String getFiles() {
+        openConnection();
+        String files = "<div id=\"files\"><table>";
+        try {
+            final Vector<LsEntry> entries = channel.ls(workingDirectory);
+            
+            for (LsEntry entry : entries) {
+                if (!entry.getAttrs().isDir()) {
                     files += "<tr>";
                     files += "<td>" + entry.getFilename() + "</td>";
                     files += "<td>";
@@ -115,17 +170,17 @@ public class JschSftpConnect {
                     files += "</tr>";
                 }
             }
-            
-            directories += "</ul></div>";
             files += "</table>";
             files += "</div>";
         } catch (Exception e) {
             files = "<p>Failed to read from directory</p>";
         }
-        return "<h2>View Files in " + workingDirectory + "</h2>\n" + directories + files;
+        closeConnection();
+        return files;
     }
     
     public void upload(FileItem fi, String fileName) {
+        openConnection();
         try { 
             channel.cd(workingDirectory);
             InputStream inputStream = fi.getInputStream();
@@ -134,10 +189,12 @@ public class JschSftpConnect {
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        closeConnection();
     }
     
     //http://www.javaxp.com/2015/06/jsch-uploaddownload-files-from-remote.html
     public void download(String fileName, OutputStream os) {
+        openConnection();
         byte[] buffer = new byte[1024];
         try {
             channel.cd(workingDirectory);
@@ -152,5 +209,6 @@ public class JschSftpConnect {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        closeConnection();
     }
 }
