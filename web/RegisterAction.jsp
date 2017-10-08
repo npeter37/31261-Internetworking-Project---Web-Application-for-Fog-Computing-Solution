@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registering...</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
+        <jsp:useBean id="sftpConnection" class="sftp.JschSftpConnect" scope="session"></jsp:useBean>
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
@@ -41,6 +42,10 @@
                         //String new_password = user.getPassword();
                         user.setHashed_pw(password); //hashes the password
                         registerApp.updateXML(users);
+                        %>
+                            <jsp:setProperty name="sftpConnection" property="user" value="<%=user%>"/>
+                            <jsp:setProperty name="sftpConnection" property="workingDirectory" value="<%=user.getEmail()%>"/>
+                        <%
                         response.sendRedirect("Home.jsp");
                     } else { %>
             <p>Sorry. That email has already been registered.</p>
