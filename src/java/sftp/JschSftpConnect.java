@@ -24,6 +24,7 @@ public class JschSftpConnect {
     private Session session;
     private ChannelSftp channel;
     private User user;
+    private String workingDirectory;
     
     public JschSftpConnect (String host, String username, String password, User user) {
         this.user = user;
@@ -76,32 +77,40 @@ public class JschSftpConnect {
     }
     
     public String listDirectory() {
-        String s = ""; 
+        String files = "<div id=\"files\"><table>";
+        String directories = "<div id=\"directories\"><ul>";
         try {
-            final Vector<LsEntry> files = channel.ls(".");
-            s += "<h2>View Files in " + channel.pwd() + "</h2>\n";
-            s += "<table>";
-            for (LsEntry entry : files) {
-                s += "<tr>";
-                s += "<td>" + entry.getFilename() + "</td>";
-                s += "<td>";
-                s += "<form action=\"DownloadFile.jsp\" method=\"post\">";
-                s += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
-                s += "<input type=\"submit\" value=\"Download\">";
-                s += "</form>";
-                s += "</td><td>";
-                s += "<form action=\"DeleteFile.jsp\" method=\"post\">";
-                s += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
-                s += "<input type=\"submit\" value=\"Delete\">";
-                s += "</form>";
-                s += "</td>";
-                s += "</tr>";
+            final Vector<LsEntry> entries = channel.ls(".");
+            workingDirectory = channel.pwd();
+            
+            for (LsEntry entry : entries) {
+                if (entry.getAttrs().isDir()) {
+                    directories += "<li>" + entry.getFilename() + "</li>";
+                } else {
+                    files += "<tr>";
+                    files += "<td>" + entry.getFilename() + "</td>";
+                    files += "<td>";
+                    files += "<form action=\"DownloadFile.jsp\" method=\"post\">";
+                    files += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
+                    files += "<input type=\"submit\" value=\"Download\">";
+                    files += "</form>";
+                    files += "</td><td>";
+                    files += "<form action=\"DeleteFile.jsp\" method=\"post\">";
+                    files += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
+                    files += "<input type=\"submit\" value=\"Delete\">";
+                    files += "</form>";
+                    files += "</td>";
+                    files += "</tr>";
+                }
             }
-            s += "</table>";
+            
+            directories += "</ul></div>";
+            files += "</table>";
+            files += "</div>";
         } catch (Exception e) {
-            s = "Failed to read from directory";
+            files = "<p>Failed to read from directory</p>";
         }
-        return s;
+        return "<h2>View Files in " + workingDirectory + "</h2>\n" + directories + files;
     }
     
     public void upload(FileItem fi, String fileName) {
@@ -116,11 +125,14 @@ public class JschSftpConnect {
     }
     
     //http://www.javaxp.com/2015/06/jsch-uploaddownload-files-from-remote.html
-    public void download(String fileName, OutputStream os) {
+    public void download(String fileName) {
         byte[] buffer = new byte[1024];
         try {
             channel.cd(".");
+            channel.get(fileName);
             BufferedInputStream bis = new BufferedInputStream(channel.get(fileName));
+            File newFile = new File("C:/temp/" + fileName); //
+            OutputStream os = new FileOutputStream(newFile); //
             BufferedOutputStream bos = new BufferedOutputStream(os);
             int readCount;
             while ((readCount = bis.read(buffer)) > 0) {

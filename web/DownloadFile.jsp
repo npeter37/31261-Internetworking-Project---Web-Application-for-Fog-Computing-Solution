@@ -4,11 +4,6 @@
     Author     : James
 --%>
 
-<%@page import="java.io.FileInputStream"%>
-<%@page import="java.nio.file.Files"%>
-<%@page import="java.io.File"%>
-<%@page import="java.io.OutputStream"%>
-<%@page import="java.io.BufferedOutputStream"%>
 <%@page import="sftp.JschSftpConnect"%>
 <%@page import="user.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,9 +17,9 @@
             String fileName = (String)request.getParameter("fileName");
             User user = (User) session.getAttribute("user");
             JschSftpConnect connection = new JschSftpConnect("127.0.0.1", "tester", "password", user);
-            OutputStream os = response.getOutputStream();
-            connection.download(fileName, os);
+            connection.download(fileName);
             connection.closeConnection();
+            response.sendRedirect("ViewFiles.jsp");
         %>
     </head>
     <body>
