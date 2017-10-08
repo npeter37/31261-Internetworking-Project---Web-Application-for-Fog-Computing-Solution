@@ -64,6 +64,7 @@ public class Users implements Serializable {
                 return null;
             }
         }
+        attempt--;
         return null; // Login incorrect. Return null.
     }
 
