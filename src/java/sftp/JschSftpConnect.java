@@ -125,21 +125,18 @@ public class JschSftpConnect {
     }
     
     //http://www.javaxp.com/2015/06/jsch-uploaddownload-files-from-remote.html
-    public void download(String fileName) {
+    public void download(String fileName, OutputStream os) {
         byte[] buffer = new byte[1024];
         try {
             channel.cd(".");
-            channel.get(fileName);
             BufferedInputStream bis = new BufferedInputStream(channel.get(fileName));
-            File newFile = new File("C:/temp/" + fileName); //
-            OutputStream os = new FileOutputStream(newFile); //
             BufferedOutputStream bos = new BufferedOutputStream(os);
             int readCount;
             while ((readCount = bis.read(buffer)) > 0) {
                 bos.write(buffer, 0, readCount);
             }
             bis.close();
-            bos.close();
+            bos.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
