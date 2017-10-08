@@ -37,7 +37,7 @@
             %>    
             <p>Login failed. You have <%=loginAttempt%> login attempts left.</p>
             <%
-                if (loginAttempt == 0) {
+                if (loginAttempt <= 0) {
                     response.sendRedirect("loginblock.jsp");
                 }
             %>
