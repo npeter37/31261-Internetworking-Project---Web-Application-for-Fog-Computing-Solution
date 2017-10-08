@@ -30,9 +30,7 @@
     <body>
         <jsp:include page="Menu.jsp" />
         <div id="content">
-            <h2>View Files</h2>
-            
-            <p><%=s%></p> <!-- print file list -->
+            <%=s%> <!-- print file list -->
             
             <form action="MakeDirectory.jsp" method="post">
                 <input class="inputWidth" type="text" name="folderName">
@@ -44,13 +42,6 @@
             <form action="UploadFile.jsp" method="post" enctype="multipart/form-data">
                 <input type="file" name="fileName" size="50">
                 <input type="submit" value="Upload File">
-            </form>
-            
-            <h2>Download File</h2>
-            <p>Select a File to Download</p>
-            <form action="DownloadFile.jsp" method="post">
-                <input type="text" name="fileName" size="50">
-                <input type="submit" value="Download File">
             </form>
         </div>
     </body>

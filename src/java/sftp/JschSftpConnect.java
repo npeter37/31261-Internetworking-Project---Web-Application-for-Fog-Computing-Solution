@@ -71,10 +71,20 @@ public class JschSftpConnect {
         String s = ""; 
         try {
             final Vector<LsEntry> files = channel.ls(".");
-            s += "<h3>" + channel.pwd() + "</h3>\n";
+            s += "<h2>View Files in " + channel.pwd() + "</h2>\n";
+            s += "<table>";
             for (LsEntry entry : files) {
-                s += entry.getFilename() + "<br>\n";
+                s += "<tr>";
+                s += "<td>" + entry.getFilename() + "</td>";
+                s += "<td>";
+                s += "<form action=\"DownloadFile.jsp\" method=\"post\">";
+                s += "<input type=\"hidden\" name=\"fileName\" value=\"" + entry.getFilename() + "\">";
+                s += "<input type=\"submit\" value=\"Download\">";
+                s += "</form>";
+                s += "</td>";
+                s += "</tr>";
             }
+            s += "</table>";
         } catch (Exception e) {
             s = "Failed to read from directory";
         }
