@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>Register</h2>
             <%
                 String answer = request.getParameter("answer");

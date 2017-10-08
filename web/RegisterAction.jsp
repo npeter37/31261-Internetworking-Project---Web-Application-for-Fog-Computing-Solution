@@ -19,7 +19,7 @@
     <body>
         <jsp:include page="Menu.jsp" />
         <h2>Register</h2>
-        <div>
+        <div id="content">
             <%
                 String name = request.getParameter("name");
                 String email = request.getParameter("email");

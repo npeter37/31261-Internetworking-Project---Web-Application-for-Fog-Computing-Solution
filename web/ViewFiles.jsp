@@ -29,7 +29,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>View Files</h2>
             
             <p><%=s%></p> <!-- print file list -->

@@ -15,7 +15,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>Home</h2>
             <%--Add an if statement that if user is logged in, that it will show a different message --%>
             <p>This is a private cloud where you can freely upload files and folders. In this cloud, we aim to provide a highly secured platform in which we can guarantee that your files will be safe and properly secured.</p>

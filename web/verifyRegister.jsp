@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <h2>Verify</h2>
             <form action="Register.jsp" method="post">
                 <p>Please answer the secret question before proceeding to register.</p>

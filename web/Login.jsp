@@ -13,7 +13,7 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <jsp:useBean id="logIn" class="user.UsersApp" scope="session">
                 <jsp:setProperty name="logIn" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
             </jsp:useBean>
