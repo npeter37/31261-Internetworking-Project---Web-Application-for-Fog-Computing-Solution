@@ -32,6 +32,8 @@ public class User implements Serializable {
     private String hashed_pw;
     @XmlElement(name = "secretanswer")
     private String secretanswer;
+    
+    private static int workload = 12;
 
     public String getSecretanswer() {
         return secretanswer;
@@ -53,7 +55,7 @@ public class User implements Serializable {
     public static void setWorkload(int workload) {
         User.workload = workload;
     }
-    private static int workload = 12;
+    
 
     public User() {
     }

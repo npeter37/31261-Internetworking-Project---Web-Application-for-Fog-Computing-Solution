@@ -13,26 +13,38 @@
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
-        <div>
+        <div id="content">
             <jsp:useBean id="logIn" class="user.UsersApp" scope="session">
                 <jsp:setProperty name="logIn" property="filePath" value="<%=application.getRealPath("WEB-INF/users.xml")%>"/>
             </jsp:useBean>
             <% if (request.getParameter("log") != null) {
+                    int loginAttempt = Users.getAttempt();
                     Users users = logIn.getUsers();
-                    User user = users.login(request.getParameter("email"), request.getParameter("password"));
+                    User user = users.loginAttempt(request.getParameter("email"), request.getParameter("password"));
                     //replace "login" with "loginhashed" so it will check if the password matches with the hash for newly registered accounts. It will not work for the current hard coded data in the users.xml file.
 
                     if (user != null) {
-                        if (request.getParameter("secretanswer").equals(user.getSecretanswer())) {
+                        //session.setAttribute("user", user);
+                        //response.sendRedirect("Home.jsp");
+                        String answer = user.getSecretanswer();
+                        if (request.getParameter("secretanswer").equals(answer)) {
                             session.setAttribute("user", user);
                             response.sendRedirect("Home.jsp");
-                        } else { %>
-            <p>Secret answer is incorrect. Please try again.</p>
-            <%}
-                        } else if (user == null) { %>
-            <p>Login failed.</p>
+                        } else {
+                            response.sendRedirect("Login.jsp");
+                        }
+                    }
+            %>    
+            <p>Login failed. You have <%=loginAttempt%> login attempts left.</p>
+            <%
+                if (loginAttempt == 0) {
+                    response.sendRedirect("loginblock.jsp");
+                }
+            %>
             <% }
-                       }%>
+            %>
+
+
 
             <h2>Login</h2>
             <form action="Login.jsp" method="post">
@@ -46,7 +58,7 @@
                         <td><input class="inputWidth" type="password" name="password" required></td>
                     </tr>
                     <tr>
-                        <td><label class="field" for="secretanswer">What is the answer to your secret question?</label></td>
+                        <td><label class="field" for="secretanswer">Secret Question: What is your secret?</label></td>
                         <td><input class="inputWidth" type="text" name="secretanswer" required></td>
                     </tr>
                     <tr>
