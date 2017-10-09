@@ -116,7 +116,7 @@ public class JschSftpConnect implements Serializable {
     public void deleteFile(String fileName) {
         openConnection();
         try {
-            channel.rm(fileName);
+            channel.rm(workingDirectory + "/" + fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
