@@ -99,7 +99,7 @@ body, html {
     border-top-right-radius: 5px;
 }
 
-#directories ul li input[type=submit] {
+#directories ul li .directory-button input[type=submit] {
     width: 80px;
     height: 80px;
     padding: 5px 15px; 
@@ -109,7 +109,7 @@ body, html {
     border-radius: 5px; 
 }
 
-#directories ul li input[type=submit]:hover {
+#directories ul li .directory-button input[type=submit]:hover {
     background-color: #A9A9A9;
 }
 

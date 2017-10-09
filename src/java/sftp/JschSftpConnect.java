@@ -123,6 +123,28 @@ public class JschSftpConnect implements Serializable {
         closeConnection();
     }
     
+    public void deleteDirectory(String directoryName) {
+        openConnection();
+        try {
+            final Vector<LsEntry> entries = channel.ls(workingDirectory + "/" + directoryName);
+            for (LsEntry entry : entries) {
+                if (!entry.getAttrs().isDir()) {
+                    channel.rm(workingDirectory + "/" + directoryName + "/" + entry.getFilename());
+                } else if (!entry.getFilename().equals(".") && !entry.getFilename().equals("..")) {
+                    try {
+                        channel.rmdir(workingDirectory + "/" + directoryName + "/" + entry.getFilename());
+                    } catch (Exception e) {
+                        deleteDirectory(directoryName + "/" + entry.getFilename());
+                    }
+                }
+            }
+            channel.rmdir(workingDirectory + "/" + directoryName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        closeConnection();
+    }
+    
     public String getWorkingDirectory() {
         String s = "";
         s += "<h2>" + workingDirectory + "</h2>";
@@ -154,10 +176,15 @@ public class JschSftpConnect implements Serializable {
             for (LsEntry entry : entries) {
                 if (entry.getAttrs().isDir() && (!entry.getFilename().equals(".") && !entry.getFilename().equals(".."))) {
                     directories += "<li>";
-                    directories += "<form action=\"ChangeDirectory.jsp\" method=\"post\">";
+                    directories += "<form class=\"directory-button\" action=\"ChangeDirectory.jsp\" method=\"post\">";
                     directories += "<input type=\"hidden\" name=\"workingDirectory\" value=\"" + entry.getFilename() + "\">";
                     directories += "<input type=\"submit\" value=\"" + entry.getFilename() + "\">";
-                    directories += "</form></li>";
+                    directories += "</form>";
+                    directories += "<form class=\"directory-delete\" action=\"DeleteDirectory.jsp\" method=\"post\">";
+                    directories += "<input type=\"hidden\" name=\"directoryName\" value=\"" + entry.getFilename() + "\">";
+                    directories += "<input type=\"submit\" value=\"Delete\">";
+                    directories += "</form>";
+                    directories += "</li>";
                 }
             }
             directories += "</ul>";
