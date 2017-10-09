@@ -21,10 +21,6 @@
         <div id="content">
             <!-- print file list -->
             <jsp:getProperty name="sftpConnection" property="workingDirectory"/>
-            <form action="MakeDirectory.jsp" method="post">
-                <input class="inputWidth" type="text" name="folderName">
-                <input type="submit" value="New Folder">
-            </form>
             <jsp:getProperty name="sftpConnection" property="directories"/>
             <jsp:getProperty name="sftpConnection" property="files"/>
             

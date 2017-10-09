@@ -132,12 +132,27 @@ public class JschSftpConnect implements Serializable {
     
     public String getDirectories() {
         openConnection();
-        String directories = "<div id=\"directories\"><ul>";
+        String directories = "<div id=\"directories\">";
         System.out.println(workingDirectory);
         try {
             final Vector<LsEntry> entries = channel.ls(workingDirectory);
+            directories += "<div id=\"directory-options\">";
+            directories += "<form action=\"ChangeDirectory.jsp\" method=\"post\">";
+            directories += "<input type=\"hidden\" name=\"workingDirectory\" value=\".\">";
+            directories += "<input type=\"submit\" value=\"Home Directory\">";
+            directories += "</form>";
+            directories += "<form action=\"ChangeDirectory.jsp\" method=\"post\">";
+            directories += "<input type=\"hidden\" name=\"workingDirectory\" value=\"..\">";
+            directories += "<input type=\"submit\" value=\"Parent Directory\">";
+            directories += "</form>";
+            directories += "<form action=\"MakeDirectory.jsp\" method=\"post\">";
+            directories += "<input class=\"inputWidth\" type=\"text\" name=\"folderName\" placeholder=\"Folder Name...\">";
+            directories += "<input type=\"submit\" value=\"New Folder\">";
+            directories += "</form>";
+            directories += "</div>";
+            directories += "<ul>";
             for (LsEntry entry : entries) {
-                if (entry.getAttrs().isDir()) {
+                if (entry.getAttrs().isDir() && (!entry.getFilename().equals(".") && !entry.getFilename().equals(".."))) {
                     directories += "<li>";
                     directories += "<form action=\"ChangeDirectory.jsp\" method=\"post\">";
                     directories += "<input type=\"hidden\" name=\"workingDirectory\" value=\"" + entry.getFilename() + "\">";
@@ -145,10 +160,11 @@ public class JschSftpConnect implements Serializable {
                     directories += "</form></li>";
                 }
             }
+            directories += "</ul>";
         } catch (Exception e) {
             directories = "<p>Failed to read from directory" + workingDirectory + "</p>";
         }
-        directories += "</ul></div>";
+        directories += "</div>";
         closeConnection();
         return directories;
     }
