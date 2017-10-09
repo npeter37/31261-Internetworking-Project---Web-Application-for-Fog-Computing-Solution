@@ -123,9 +123,16 @@ public class JschSftpConnect implements Serializable {
         closeConnection();
     }
     
+    public String getWorkingDirectory() {
+        String s = "";
+        s += "<h2>" + workingDirectory + "</h2>";
+        s = s.replaceFirst("./" + user.getEmail(), "Home_Directory");
+        return s;
+    }
+    
     public String getDirectories() {
         openConnection();
-        String directories = workingDirectory + "<div id=\"directories\"><ul>";
+        String directories = "<div id=\"directories\"><ul>";
         System.out.println(workingDirectory);
         try {
             final Vector<LsEntry> entries = channel.ls(workingDirectory);

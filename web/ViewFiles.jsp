@@ -20,12 +20,14 @@
         <jsp:include page="Menu.jsp" />
         <div id="content">
             <!-- print file list -->
-            <jsp:getProperty name="sftpConnection" property="directories"/>
-            <jsp:getProperty name="sftpConnection" property="files"/>
+            <jsp:getProperty name="sftpConnection" property="workingDirectory"/>
             <form action="MakeDirectory.jsp" method="post">
                 <input class="inputWidth" type="text" name="folderName">
                 <input type="submit" value="New Folder">
             </form>
+            <jsp:getProperty name="sftpConnection" property="directories"/>
+            <jsp:getProperty name="sftpConnection" property="files"/>
+            
             
             <h2>Upload File</h2>
             <p>Select a File to upload</p>
