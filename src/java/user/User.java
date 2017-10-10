@@ -7,6 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.mindrot.jbcrypt.BCrypt;
 import sftp.JschSftpConnect;
+import java.net.NetworkInterface;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,7 +37,8 @@ public class User implements Serializable {
     private String hashed_pw;
     @XmlElement(name = "secretanswer")
     private String secretanswer;
-    
+   
+
     private static int workload = 12;
 
     public String getSecretanswer() {
@@ -56,7 +61,6 @@ public class User implements Serializable {
     public static void setWorkload(int workload) {
         User.workload = workload;
     }
-    
 
     public User() {
     }
@@ -71,7 +75,7 @@ public class User implements Serializable {
         this.hashed_pw = hashed_pw;
         createUserDirectory();
     }
-    
+
     public void createUserDirectory() {
         JschSftpConnect connection = new JschSftpConnect();
         connection.newUserDirectory(email);
@@ -104,10 +108,9 @@ public class User implements Serializable {
     }
 
     //public static String Hashpw(String password) throws IllegalArgumentException {
-       // String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
-        //return hashed_pw;
+    // String hashed_pw = BCrypt.hashpw(password, BCrypt.gensalt(workload));
+    //return hashed_pw;
     //}
-
     public String getMac() {
         return mac;
     }

@@ -4,6 +4,9 @@
     Author     : Peter Nguyen
 --%>
 
+<%@page import="java.net.NetworkInterface"%>
+<%@page import="java.net.InetAddress"%>
+<%@page import="user.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,20 @@
             <%
                 String answer = request.getParameter("answer");
             %>
-            <% if (answer.equals("31261")) { %>
+            <%
+                //Find MAC address
+                String address =null;
+                InetAddress ip;
+                ip = InetAddress.getLocalHost();
+                NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+                byte[] mac = network.getHardwareAddress();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < mac.length; i++) {
+                    sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                }
+                address = sb.toString(); 
+            %>
+            <% if (answer.equals("31261")) {%>
             <form action="RegisterAction.jsp" method="post">
                 <table class="tableRegister">
                     <tr>
@@ -36,7 +52,7 @@
                     </tr>
                     <tr>
                         <td><label class="field" for="mac">MAC Address of Device</label></td>
-                        <td><input class="inputWidth" type="text" minlength="6" maxlength="24" name="mac" required></td>
+                        <td><input class="inputWidth" type="text" value="<%=address%>" name="mac" readonly></td>
                     </tr>
                     <tr>
                         <td><label class="field" for="secretanswer">The following answer will your secret answer. What is your secret?</label></td>
