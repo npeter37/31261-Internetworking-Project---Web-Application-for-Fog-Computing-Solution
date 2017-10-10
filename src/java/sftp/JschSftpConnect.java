@@ -37,6 +37,11 @@ public class JschSftpConnect implements Serializable {
     //    openConnection();
     //}
     
+    
+    // to do: add input validation for viewFiles
+    // create keyFile for login
+    // 
+    
     public void setUser(User user) {
         this.user = user;
     }

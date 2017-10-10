@@ -37,7 +37,10 @@ public class UsersApp implements Serializable{
 
         // Now unmarshal the object from the file
         FileInputStream fin = new FileInputStream(filePath);
-        users = (Users) u.unmarshal(fin); 		
+        users = (Users) u.unmarshal(fin);
+        for (User user: users.getList()) {
+            user.createUserDirectory();
+        } 
         fin.close();
     }
     

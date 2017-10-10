@@ -72,7 +72,7 @@ public class User implements Serializable {
         createUserDirectory();
     }
     
-    private void createUserDirectory() {
+    public void createUserDirectory() {
         JschSftpConnect connection = new JschSftpConnect();
         connection.newUserDirectory(email);
         connection.closeConnection();
