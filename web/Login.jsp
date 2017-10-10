@@ -22,7 +22,7 @@
             <% if (request.getParameter("log") != null) {
                     int loginAttempt = Users.getAttempt();
                     Users users = logIn.getUsers();
-                    User user = users.loginAttempt(request.getParameter("email"), request.getParameter("password"));
+                    User user = users.loginhashed(request.getParameter("email"), request.getParameter("password"));
                     //replace "loginAttempt" with "loginhashed" so it will check if the password matches with the hash for newly registered accounts. It will not work for the current hard coded data in the users.xml file.
 
                     if (user != null) {
