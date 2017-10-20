@@ -27,6 +27,7 @@
                 String password = user.getPassword();
                 String mac = user.getMac();
                 String secretanswer= user.getSecretanswer();
+                String hashedpw = user.getHashed_pw();
 
                 if (request.getParameter("edit") != null) {
                     session.setAttribute("user", user);
@@ -62,7 +63,7 @@
                     </tr>
                     <tr>
                         <td><label class="field" for="secretanswer">The following answer will your secret answer. What is your secret?</label></td>
-                        <td><input class="inputWidth" value="<%=secretanswer%>" type="text" name="secretanswer" required></td>
+                        <td><input class="inputWidth" value="<%=secretanswer%>" type="password" name="secretanswer" required></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -71,6 +72,9 @@
                     </tr>
                 </table>
             </form>
+                    <h3>Demo:</h3>
+                    <p>Password = <%=password%> </p>
+                    <p>Hashed password = <%=hashedpw%> </p>
         </div>
     </body>
 </html>

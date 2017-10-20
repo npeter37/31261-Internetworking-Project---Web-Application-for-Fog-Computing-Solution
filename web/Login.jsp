@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td><label class="field" for="secretanswer">Secret Question: What is your secret?</label></td>
-                        <td><input class="inputWidth" type="text" name="secretanswer" required></td>
+                        <td><input class="inputWidth" type="password" name="secretanswer" required></td>
                     </tr>
                     <tr>
                         <td></td>
