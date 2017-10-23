@@ -172,8 +172,8 @@ public class JschSftpConnect implements Serializable {
             directories += "<input type=\"hidden\" name=\"workingDirectory\" value=\"..\">";
             directories += "<input type=\"submit\" value=\"Parent Directory\">";
             directories += "</form>";
-            directories += "<form action=\"MakeDirectory.jsp\" method=\"post\">";
-            directories += "<input class=\"inputWidth\" type=\"text\" name=\"folderName\" placeholder=\"Folder Name...\">";
+            directories += "<form name=\"newFolder\" action=\"MakeDirectory.jsp\" onsubmit=\"return validateNewFolder()\" method=\"post\">";
+            directories += "<input class=\"inputWidth\" type=\"text\" name=\"folderName\" placeholder=\"Folder Name...\" required maxlength=\"10\">";
             directories += "<input type=\"submit\" value=\"New Folder\">";
             directories += "</form>";
             directories += "</div>";

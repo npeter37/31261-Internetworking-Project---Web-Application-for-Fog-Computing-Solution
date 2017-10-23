@@ -14,7 +14,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Files</title>
         <link rel="stylesheet" href="css/MainFormat.css" />
-            
+        <script>
+            function validateNewFolder() {
+                var x = document.forms["newFolder"]["folderName"].value;
+                if(x.includes("<") || x.includes(">") || x.includes("|") || x.includes("&") || x.includes(".") || x.includes("\"") || x.includes("\"") || x.includes("\\")) {
+                    alert("Folder name cannot include: <>|&.\"\\");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        </script>    
     </head>
     <body>
         <jsp:include page="Menu.jsp" />
